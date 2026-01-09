@@ -36,5 +36,6 @@ jobs:
           if-no-files-found: error
       - uses: svenstaro/upload-release-action@v2
         with:
-          tag: '25.10.26'
+          tag: 'Orange Fox Files'
           file: orangefox-nothing-spacewar.img
+          overwrite: true
