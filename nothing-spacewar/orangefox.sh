@@ -9,9 +9,17 @@ git config --global color.ui auto
 git clone https://gitlab.com/OrangeFox/sync
 env --chdir=sync bash orangefox_sync.sh --branch 12.1 --path $(pwd)/build
 cd build
+
 git clone --depth=1 https://github.com/QCerberusQ/orangefox_device_nothing_Spacewar device/nothing/Spacewar
 git clone --depth=1 https://github.com/LineageOS/android_kernel_nothing_sm7325 kernel/nothing/sm7325
 mkdir -p device/nothing/Spacewar/prebuilt/dtbs
+
+# >>>>>>> BURAYA EKLE <<<<<<<<
+echo ">>> Fixing OrangeFox theme (twres)"
+mkdir -p device/nothing/Spacewar/recovery/root/twres
+cp -r bootable/recovery/gui/theme/portrait_hdpi \
+    device/nothing/Spacewar/recovery/root/twres/
+# >>>>>>> BURASI <<<<<<<<
 
 # extract dtb and vendor-ramdisk
 curl -LO https://lineageos.mirror.karneval.cz/full/Spacewar/20260107/vendor_boot.img
@@ -20,8 +28,10 @@ cp vendor_boot_unpacked/vendor_ramdisk device/nothing/Spacewar/prebuilt/vendor-r
 cp vendor_boot_unpacked/dtb device/nothing/Spacewar/prebuilt/dtbs/Spacewar.dtb
 
 # include parted and sgdisk static binaries
-curl https://github.com/pocketblue/parted-static/releases/download/v3.6/parted -Lo device/nothing/Spacewar/recovery/root/system/bin/parted
-curl https://github.com/pocketblue/sgdisk-static/releases/download/v1.0.10/sgdisk -Lo device/nothing/Spacewar/recovery/root/system/bin/sgdisk
+curl https://github.com/pocketblue/parted-static/releases/download/v3.6/parted \
+  -Lo device/nothing/Spacewar/recovery/root/system/bin/parted
+curl https://github.com/pocketblue/sgdisk-static/releases/download/v1.0.10/sgdisk \
+  -Lo device/nothing/Spacewar/recovery/root/system/bin/sgdisk
 chmod +x device/nothing/Spacewar/recovery/root/system/bin/parted
 chmod +x device/nothing/Spacewar/recovery/root/system/bin/sgdisk
 
@@ -30,4 +40,5 @@ source build/envsetup.sh
 lunch twrp_Spacewar-eng
 mka vendorbootimage
 
-cp out/target/product/Spacewar/OrangeFox-R11.3-Beta-Spacewar.img $GITHUB_WORKSPACE/orangefox-nothing-spacewar.img
+cp out/target/product/Spacewar/OrangeFox-R11.3-Beta-Spacewar.img \
+   $GITHUB_WORKSPACE/orangefox-nothing-spacewar.img
