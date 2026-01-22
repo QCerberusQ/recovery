@@ -14,8 +14,7 @@ git clone --depth=1 https://github.com/LineageOS/android_kernel_nothing_sm7325 k
 mkdir -p device/nothing/Spacewar/prebuilt/dtbs
 
 # extract dtb and vendor-ramdisk
-curl -LO https://store-eu-gra-2.gofile.io/download/web/d6af189b-28d8-48b0-adba-ada1cc46b426/vendor_boot.img
-#curl -LO https://lineageos.mirror.karneval.cz/full/Spacewar/20260107/vendor_boot.img
+curl -LO https://lineageos.mirror.karneval.cz/full/Spacewar/20260107/vendor_boot.img
 python system/tools/mkbootimg/unpack_bootimg.py --boot_img=vendor_boot.img --out=vendor_boot_unpacked
 cp vendor_boot_unpacked/vendor_ramdisk device/nothing/Spacewar/prebuilt/vendor-ramdisk
 cp vendor_boot_unpacked/dtb device/nothing/Spacewar/prebuilt/dtbs/Spacewar.dtb
