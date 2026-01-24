@@ -27,7 +27,7 @@ chmod +x device/nothing/Spacewar/recovery/root/system/bin/sgdisk
 
 # build
 source build/envsetup.sh
-lunch twrp_Spacewar-eng
+lunch omni_Spacewar-eng
 mka recoveryimage
 
 cp out/target/product/Spacewar/OrangeFox-R11.3-Beta-Spacewar.img $GITHUB_WORKSPACE/orangefox-nothing-spacewar.img
